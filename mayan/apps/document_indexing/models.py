@@ -28,6 +28,8 @@ class Index(models.Model):
     """
     Parent model that defines an index and hold all the relationship for its
     template and instance when resolved.
+
+    索引model，
     """
     label = models.CharField(
         max_length=128, unique=True, verbose_name=_('Label')
@@ -120,6 +122,7 @@ class Index(models.Model):
 
 
 class IndexInstance(Index):
+    '''索引实例'''
     def get_instance_node_count(self):
         try:
             return self.instance_root.get_descendant_count()
@@ -275,6 +278,7 @@ class IndexTemplateNode(MPTTModel):
 
 @python_2_unicode_compatible
 class IndexInstanceNode(MPTTModel):
+    '''索引实例节点'''
     parent = TreeForeignKey(
         'self', blank=True, null=True, on_delete=models.CASCADE
     )
@@ -395,6 +399,7 @@ class IndexInstanceNode(MPTTModel):
 
 
 class DocumentIndexInstanceNode(IndexInstanceNode):
+    '''文档索引实例节点'''
     objects = DocumentIndexInstanceNodeManager()
 
     class Meta:

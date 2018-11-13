@@ -18,16 +18,22 @@ logger = logging.getLogger(__name__)
 
 @python_2_unicode_compatible
 class Comment(models.Model):
+    '''评论'''
+
+    # 文档
     document = models.ForeignKey(
         Document, db_index=True, on_delete=models.CASCADE,
         related_name='comments', verbose_name=_('Document')
     )
+    # 用户
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, editable=False, on_delete=models.CASCADE,
         related_name='comments', verbose_name=_('User'),
     )
+    # 评论
     # Translators: Comment here is a noun and refers to the actual text stored
     comment = models.TextField(verbose_name=_('Comment'))
+    # 提交时间
     submit_date = models.DateTimeField(
         auto_now_add=True, db_index=True,
         verbose_name=_('Date time submitted')

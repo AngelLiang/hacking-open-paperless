@@ -63,7 +63,10 @@ class DocumentType(models.Model):
     """
     Define document types or classes to which a specific set of
     properties can be attached
+
+    文档类型model
     """
+    # 名称
     label = models.CharField(
         max_length=32, unique=True, verbose_name=_('Label')
     )
@@ -148,27 +151,36 @@ class Document(models.Model):
     * uuid - UUID of a document, universally Unique ID. An unique identifier
     generated for each document. No two documents can ever have the same UUID.
     This ID is generated automatically.
+
+    文档model
     """
 
+    # 使用uuid作为唯一标识符
     uuid = models.UUIDField(default=uuid.uuid4, editable=False)
+    # 文档类型
     document_type = models.ForeignKey(
         DocumentType, on_delete=models.CASCADE, related_name='documents',
         verbose_name=_('Document type')
     )
+    # 名称
     label = models.CharField(
         blank=True, db_index=True, default='', max_length=255,
         help_text=_('The name of the document'), verbose_name=_('Label')
     )
+    # 描述
     description = models.TextField(
         blank=True, default='', verbose_name=_('Description')
     )
+    # 添加时间
     date_added = models.DateTimeField(
         auto_now_add=True, db_index=True, verbose_name=_('Added')
     )
+    # 语言
     language = models.CharField(
         blank=True, default=setting_language.value, max_length=8,
         verbose_name=_('Language')
     )
+    # 在垃圾箱？
     in_trash = models.BooleanField(
         db_index=True, default=False, editable=False,
         verbose_name=_('In trash?')
@@ -332,6 +344,7 @@ class Document(models.Model):
 
 
 class DeletedDocument(Document):
+    '''已删除的文档'''
     objects = TrashCanManager()
 
     class Meta:
@@ -354,6 +367,8 @@ class DocumentVersion(models.Model):
     binary data. Only identical documents will have the same checksum. If a
     document is modified after upload it's checksum will not match, used for
     detecting file tampering among other things.
+
+    文档版本model，描述文档版本和它的属性。
     """
     _pre_open_hooks = {}
     _post_save_hooks = {}
@@ -366,13 +381,16 @@ class DocumentVersion(models.Model):
     def register_post_save_hook(cls, order, func):
         cls._post_save_hooks[order] = func
 
+    # 文档
     document = models.ForeignKey(
         Document, on_delete=models.CASCADE, related_name='versions',
         verbose_name=_('Document')
     )
+    # 时间戳
     timestamp = models.DateTimeField(
         auto_now_add=True, db_index=True, verbose_name=_('Timestamp')
     )
+    # 评论
     comment = models.TextField(
         blank=True, default='', verbose_name=_('Comment')
     )
@@ -385,9 +403,11 @@ class DocumentVersion(models.Model):
     mimetype = models.CharField(
         blank=True, editable=False, max_length=255, null=True
     )
+    # 编码
     encoding = models.CharField(
         blank=True, editable=False, max_length=64, null=True
     )
+    # md5校验和？
     checksum = models.CharField(
         blank=True, db_index=True, editable=False, max_length=64, null=True,
         verbose_name=_('Checksum')
@@ -670,6 +690,8 @@ class DocumentTypeFilename(models.Model):
     """
     List of labels available to a specific document type for the
     quick rename functionality
+
+    文档类型文件名？
     """
     document_type = models.ForeignKey(
         DocumentType, on_delete=models.CASCADE, related_name='filenames',
@@ -694,11 +716,15 @@ class DocumentTypeFilename(models.Model):
 class DocumentPage(models.Model):
     """
     Model that describes a document version page
+
+    文档页数
     """
+    # 文档版本
     document_version = models.ForeignKey(
         DocumentVersion, on_delete=models.CASCADE, related_name='pages',
         verbose_name=_('Document version')
     )
+    # 页数
     page_number = models.PositiveIntegerField(
         db_index=True, default=1, editable=False,
         verbose_name=_('Page number')
@@ -744,6 +770,7 @@ class DocumentPage(models.Model):
             )
 
     def generate_image(self, *args, **kwargs):
+        '''生成图片'''
         # Convert arguments into transformations
         transformations = kwargs.get('transformations', [])
 
@@ -810,6 +837,7 @@ class DocumentPage(models.Model):
         return cache_filename
 
     def get_image(self, transformations=None):
+        '''获取图片'''
         cache_filename = self.cache_filename
         logger.debug('Page cache filename: %s', cache_filename)
 
@@ -848,6 +876,7 @@ class DocumentPage(models.Model):
         return converter.get_page()
 
     def invalidate_cache(self):
+        '''缓存无效化'''
         cache_storage_backend.delete(self.cache_filename)
         for cached_image in self.cached_images.all():
             cached_image.delete()
@@ -868,10 +897,13 @@ class DocumentPage(models.Model):
 
 
 class DocumentPageCachedImage(models.Model):
+    '''文档页码缓存图片'''
+    # 文档页数
     document_page = models.ForeignKey(
         DocumentPage, on_delete=models.CASCADE, related_name='cached_images',
         verbose_name=_('Document page')
     )
+    # 文件名
     filename = models.CharField(max_length=128, verbose_name=_('Filename'))
 
     class Meta:
@@ -896,15 +928,20 @@ class RecentDocument(models.Model):
     """
     Keeps a list of the n most recent accessed or created document for
     a given user
+    
+    最近文档model，用于保存某个用户的n个最近访问的或创建的文档列表。
     """
+    # 用户
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL, db_index=True, editable=False,
         on_delete=models.CASCADE, verbose_name=_('User')
     )
+    # 文档
     document = models.ForeignKey(
         Document, editable=False, on_delete=models.CASCADE,
         verbose_name=_('Document')
     )
+    # 访问时间
     datetime_accessed = models.DateTimeField(
         auto_now=True, db_index=True, verbose_name=_('Accessed')
     )
@@ -926,6 +963,7 @@ class RecentDocument(models.Model):
 
 @python_2_unicode_compatible
 class DuplicatedDocument(models.Model):
+    '''文档副本'''
     document = models.ForeignKey(
         Document, on_delete=models.CASCADE, related_name='duplicates',
         verbose_name=_('Document')

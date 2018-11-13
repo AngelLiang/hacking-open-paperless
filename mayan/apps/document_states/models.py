@@ -210,11 +210,16 @@ class WorkflowState(models.Model):
 
 @python_2_unicode_compatible
 class WorkflowStateAction(models.Model):
+    '''工作流状态操作'''
+
+    # 工作流状态
     state = models.ForeignKey(
         WorkflowState, on_delete=models.CASCADE,
         related_name='actions', verbose_name=_('Workflow state')
     )
+    # 名称
     label = models.CharField(max_length=255, verbose_name=_('Label'))
+    # 使能
     enabled = models.BooleanField(default=True, verbose_name=_('Enabled'))
     when = models.PositiveIntegerField(
         choices=WORKFLOW_ACTION_WHEN_CHOICES,
@@ -222,11 +227,13 @@ class WorkflowStateAction(models.Model):
             'At which moment of the state this action will execute'
         ), verbose_name=_('When')
     )
+    # 操作路径
     action_path = models.CharField(
         max_length=128, help_text=_(
             'The dotted Python path to the workflow action class to execute.'
         ), verbose_name=_('Entry action path')
     )
+    # 操作数据
     action_data = models.TextField(
         blank=True, verbose_name=_('Entry action data')
     )
@@ -272,15 +279,19 @@ class WorkflowStateAction(models.Model):
 
 @python_2_unicode_compatible
 class WorkflowTransition(models.Model):
+    '''工作流转变'''
     workflow = models.ForeignKey(
         Workflow, on_delete=models.CASCADE, related_name='transitions',
         verbose_name=_('Workflow')
     )
+    # 名称
     label = models.CharField(max_length=255, verbose_name=_('Label'))
+    # 源状态
     origin_state = models.ForeignKey(
         WorkflowState, on_delete=models.CASCADE,
         related_name='origin_transitions', verbose_name=_('Origin state')
     )
+    # 目的状态
     destination_state = models.ForeignKey(
         WorkflowState, on_delete=models.CASCADE,
         related_name='destination_transitions',
@@ -301,10 +312,13 @@ class WorkflowTransition(models.Model):
 
 @python_2_unicode_compatible
 class WorkflowTransitionTriggerEvent(models.Model):
+    '''工作流转变触发事件'''
+    # 工作流转变
     transition = models.ForeignKey(
         WorkflowTransition, on_delete=models.CASCADE,
         related_name='trigger_events', verbose_name=_('Transition')
     )
+    # 事件类型
     event_type = models.ForeignKey(
         EventType, on_delete=models.CASCADE, verbose_name=_('Event type')
     )
@@ -319,10 +333,13 @@ class WorkflowTransitionTriggerEvent(models.Model):
 
 @python_2_unicode_compatible
 class WorkflowInstance(models.Model):
+    '''工作流实例'''
+    # 工作流
     workflow = models.ForeignKey(
         Workflow, on_delete=models.CASCADE, related_name='instances',
         verbose_name=_('Workflow')
     )
+    # 文档
     document = models.ForeignKey(
         Document, on_delete=models.CASCADE, related_name='workflows',
         verbose_name=_('Document')

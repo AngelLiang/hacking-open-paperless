@@ -34,6 +34,8 @@ class SignatureBaseModel(models.Model):
     * signature_id - Signature ID - Every time a key is used to sign something
     it will generate a unique signature ID. No two signature IDs are the same,
     even when using the same key.
+
+    签名model
     """
 
     document_version = models.ForeignKey(

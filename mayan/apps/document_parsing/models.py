@@ -11,10 +11,13 @@ from .managers import DocumentPageContentManager
 
 @python_2_unicode_compatible
 class DocumentPageContent(models.Model):
+    '''文档页码内容'''
+    # 文档页码
     document_page = models.OneToOneField(
         DocumentPage, on_delete=models.CASCADE, related_name='content',
         verbose_name=_('Document page')
     )
+    # 内容
     content = models.TextField(blank=True, verbose_name=_('Content'))
 
     objects = DocumentPageContentManager()
@@ -29,13 +32,17 @@ class DocumentPageContent(models.Model):
 
 @python_2_unicode_compatible
 class DocumentVersionParseError(models.Model):
+    '''文档版本解析错误'''
+    # 文档版本
     document_version = models.ForeignKey(
         DocumentVersion, on_delete=models.CASCADE,
         related_name='parsing_errors', verbose_name=_('Document version')
     )
+    # 提交时间
     datetime_submitted = models.DateTimeField(
         auto_now_add=True, db_index=True, verbose_name=_('Date time submitted')
     )
+    # 结果
     result = models.TextField(blank=True, null=True, verbose_name=_('Result'))
 
     def __str__(self):
