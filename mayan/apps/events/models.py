@@ -9,6 +9,8 @@ from .classes import Event
 
 @python_2_unicode_compatible
 class EventType(models.Model):
+    '''事件类型'''
+    # 名称
     name = models.CharField(
         max_length=64, unique=True, verbose_name=_('Name')
     )

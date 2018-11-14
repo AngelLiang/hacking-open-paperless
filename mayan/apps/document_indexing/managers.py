@@ -10,6 +10,7 @@ class DocumentIndexInstanceNodeManager(models.Manager):
 
 class IndexManager(models.Manager):
     def index_document(self, document):
+        '''索引文档'''
         for index in self.filter(enabled=True, document_types=document.document_type):
             index.index_document(document=document)
 
@@ -17,6 +18,7 @@ class IndexManager(models.Manager):
         return self.get(name=name)
 
     def rebuild(self):
+        '''重建索引'''
         for index in self.all():
             index.rebuild()
 

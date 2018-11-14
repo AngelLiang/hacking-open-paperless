@@ -46,6 +46,7 @@ class Collection(object):
 
 
 class Dashboard(object):
+    '''主页'''
     _registry = {}
 
     @classmethod

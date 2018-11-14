@@ -10,12 +10,16 @@ from .settings import setting_default_lock_timeout
 
 @python_2_unicode_compatible
 class Lock(models.Model):
+    '''锁'''
+    # 创建时间
     creation_datetime = models.DateTimeField(
         auto_now_add=True, verbose_name=_('Creation datetime')
     )
+    # 超时
     timeout = models.IntegerField(
         default=setting_default_lock_timeout.value, verbose_name=_('Timeout')
     )
+    # 名称
     name = models.CharField(
         max_length=64, unique=True, verbose_name=_('Name')
     )

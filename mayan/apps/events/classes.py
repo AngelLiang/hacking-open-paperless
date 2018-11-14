@@ -8,6 +8,7 @@ from actstream import action
 
 
 class Event(object):
+    '''事件'''
     _registry = {}
 
     @classmethod
