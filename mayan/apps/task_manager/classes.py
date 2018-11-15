@@ -11,6 +11,7 @@ from django.utils.timezone import now
 
 @python_2_unicode_compatible
 class TaskType(object):
+    '''任务类型'''
     _registry = {}
 
     @classmethod
@@ -32,6 +33,7 @@ class TaskType(object):
 
 @python_2_unicode_compatible
 class Task(object):
+    '''任务'''
     def __init__(self, task_type, kwargs):
         self.task_type = task_type
         self.kwargs = kwargs
@@ -40,6 +42,7 @@ class Task(object):
         return force_text(self.task_type)
 
     def get_time_started(self):
+        '''获取启动时间'''
         time_start = self.kwargs.get('time_start')
         if time_start:
             return now() - timedelta(seconds=monotonic() - self.kwargs['time_start'])
@@ -49,6 +52,7 @@ class Task(object):
 
 @python_2_unicode_compatible
 class CeleryQueue(object):
+    '''Celery队列'''
     _registry = {}
     _inspect_instance = inspect()
 
