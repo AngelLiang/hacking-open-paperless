@@ -19,11 +19,15 @@ from .search import cabinet_search  # NOQA
 
 @python_2_unicode_compatible
 class Cabinet(MPTTModel):
+    '''柜子'''
+    # 父类
     parent = TreeForeignKey(
         'self', blank=True, db_index=True, null=True,
         on_delete=models.CASCADE, related_name='children'
     )
+    # 名称
     label = models.CharField(max_length=128, verbose_name=_('Label'))
+    # 文档
     documents = models.ManyToManyField(
         Document, blank=True, related_name='cabinets',
         verbose_name=_('Documents')
@@ -41,6 +45,7 @@ class Cabinet(MPTTModel):
         return self.get_full_path()
 
     def add_document(self, document, user=None):
+        '''添加文档'''
         self.documents.add(document)
         event_cabinets_add_document.commit(
             action_object=self, actor=user, target=document
@@ -50,6 +55,7 @@ class Cabinet(MPTTModel):
         return reverse('cabinets:cabinet_view', args=(self.pk,))
 
     def get_document_count(self, user):
+        '''获取文档总数'''
         return self.get_documents_queryset(user=user).count()
 
     def get_documents_queryset(self, user):
@@ -65,6 +71,7 @@ class Cabinet(MPTTModel):
         return ' / '.join(result)
 
     def remove_document(self, document, user=None):
+        '''移除文档'''
         self.documents.remove(document)
         event_cabinets_remove_document.commit(
             action_object=self, actor=user, target=document
@@ -102,6 +109,7 @@ class Cabinet(MPTTModel):
 
 
 class DocumentCabinet(Cabinet):
+    '''文档书柜'''
     class Meta:
         proxy = True
         verbose_name = _('Document cabinet')

@@ -75,8 +75,11 @@ class DocumentVersionPreviewForm(forms.Form):
 class DocumentForm(forms.ModelForm):
     """
     Form sub classes from DocumentForm used only when editing a document
+
+    文档表单，用于编辑文档信息
     """
     class Meta:
+        # 文档名称、文档说明、文档语言
         fields = ('label', 'description', 'language')
         model = Document
         widgets = {
@@ -179,6 +182,8 @@ class DocumentTypeSelectForm(forms.Form):
     """
     Form to select the document type of a document to be created, used
     as form #1 in the document creation wizard
+
+    文档类型选择器表单
     """
 
     def __init__(self, *args, **kwargs):
@@ -207,6 +212,8 @@ class DocumentTypeFilenameForm_create(forms.ModelForm):
 
 
 class DocumentDownloadForm(forms.Form):
+    '''文档下载表单'''
+    # 是否压缩
     compressed = forms.BooleanField(
         label=_('Compress'), required=False,
         help_text=_(
@@ -216,6 +223,7 @@ class DocumentDownloadForm(forms.Form):
             'downloads as a compressed file.'
         )
     )
+    # 压缩文件名
     zip_filename = forms.CharField(
         initial=DEFAULT_ZIP_FILENAME, label=_('Compressed filename'),
         required=False,
@@ -245,10 +253,13 @@ class DocumentVersionDownloadForm(DocumentDownloadForm):
 
 
 class DocumentPrintForm(forms.Form):
+    '''文档打印表单'''
+    # 页码选择
     page_group = forms.ChoiceField(
         choices=PAGE_RANGE_CHOICES, initial=PAGE_RANGE_ALL,
         widget=forms.RadioSelect
     )
+    # 页数范围
     page_range = forms.CharField(label=_('Page range'), required=False)
 
 

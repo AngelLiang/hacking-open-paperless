@@ -72,23 +72,23 @@ INSTALLED_APPS = (
     'common',
     'converter',
     'django_gpg',
-    'dynamic_search',
+    'dynamic_search',           # 动态搜索
     'lock_manager',
     'mimetype',
     'navigation',
-    'permissions',
+    'permissions',              # 权限
     'smart_settings',
-    'user_management',
+    'user_management',          # 用户管理
     # Mayan EDMS
-    'cabinets',
+    'cabinets',                 # 柜子，用于存放文档
     'checkouts',
-    'document_comments',
-    'document_indexing',
+    'document_comments',        # 文档评论
+    'document_indexing',        # 文档索引
     'document_parsing',
     #'document_signatures',
     #'document_states',
-    'documents',
-    'events',
+    'documents',                # 文档
+    'events',                   # 事件
     # Disable the folders app by default
     # Will be removed in the next version
     # 'folders',
@@ -101,13 +101,14 @@ INSTALLED_APPS = (
     'ocr',
     'rest_api',
     'sources',
-    'storage',
-    'tags',
+    'storage',                  # 存储
+    'tags',                     # 标签
     'task_manager',
     # Placed after rest_api to allow template overriding
     'rest_framework_swagger',
 )
 
+# 中间件
 MIDDLEWARE_CLASSES = (
     'common.middleware.error_logging.ErrorLoggingMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -158,7 +159,7 @@ WSGI_APPLICATION = 'mayan.wsgi.application'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 数据库
-# 使用sqlite3
+# 使用了sqlite3
 # docs: https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 DATABASES = {
     'default': {

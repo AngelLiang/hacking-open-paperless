@@ -25,6 +25,7 @@ class AdvancedSearchForm(forms.Form):
 
 
 class SearchForm(forms.Form):
+    '''搜索表单'''
     q = forms.CharField(
         max_length=128, label=_('Search terms'), required=False
     )

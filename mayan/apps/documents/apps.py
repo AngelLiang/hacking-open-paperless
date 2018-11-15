@@ -108,6 +108,7 @@ class DocumentsApp(MayanAppConfig):
 
         APIEndPoint(app=self, version_string='1')
 
+        # 获取数据model
         DeletedDocument = self.get_model('DeletedDocument')
         Document = self.get_model('Document')
         DocumentPage = self.get_model('DocumentPage')
@@ -156,6 +157,7 @@ class DocumentsApp(MayanAppConfig):
             label=_('MIME type'), name='versions__mimetype', type_name='field'
         )
 
+        # 文档model权限注册
         ModelPermission.register(
             model=Document, permissions=(
                 permission_acl_edit, permission_acl_view,
@@ -171,6 +173,7 @@ class DocumentsApp(MayanAppConfig):
             )
         )
 
+        # 文档model权限注册
         ModelPermission.register(
             model=DocumentType, permissions=(
                 permission_document_create, permission_document_type_delete,
@@ -182,6 +185,7 @@ class DocumentsApp(MayanAppConfig):
             source=Document, model=DocumentType,
         )
 
+        # 权限继承
         ModelPermission.register_inheritance(
             model=Document, related='document_type',
         )
@@ -367,12 +371,14 @@ class DocumentsApp(MayanAppConfig):
             }
         )
 
+        # 主页添加widget
         dashboard_main.add_widget(widget=widget_document_types)
         dashboard_main.add_widget(widget=widget_documents_in_trash)
         dashboard_main.add_widget(widget=widget_new_documents_this_month)
         dashboard_main.add_widget(widget=widget_pages_per_month)
         dashboard_main.add_widget(widget=widget_total_documents)
 
+        # 菜单
         menu_documents.bind_links(
             links=(
                 link_document_list_recent, link_document_list,
@@ -509,6 +515,7 @@ class DocumentsApp(MayanAppConfig):
             links=(link_document_version_view,), sources=(DocumentVersion,)
         )
 
+        # namespace
         namespace = StatisticNamespace(slug='documents', label=_('Documents'))
         namespace.add_statistic(
             slug='new-documents-per-month',

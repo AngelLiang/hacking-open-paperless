@@ -17,6 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 class SearchModel(object):
+    '''搜索模型'''
     registry = {}
 
     @classmethod
@@ -91,6 +92,7 @@ class SearchModel(object):
         return queries
 
     def get_all_search_fields(self):
+        '''获取所有搜索字段'''
         return self.search_fields
 
     def get_full_name(self):
@@ -127,13 +129,18 @@ class SearchModel(object):
         ]
 
     def search(self, query_string, user, global_and_search=False):
+        '''搜索方法'''
         AccessControlList = apps.get_model(
             app_label='acls', model_name='AccessControlList'
         )
 
+        # 用时
         elapsed_time = 0
+        # 开始时间
         start_time = datetime.datetime.now()
+        # 结果集合
         result_set = set()
+        # 搜索子弹
         search_dict = {}
 
         if 'q' in query_string:
@@ -221,6 +228,7 @@ class SearchModel(object):
 
             result_set = result_set | model_result_set
 
+        # 设置搜索用时
         elapsed_time = force_text(
             datetime.datetime.now() - start_time
         ).split(':')[2]
@@ -231,6 +239,7 @@ class SearchModel(object):
             pk__in=list(result_set)[:setting_limit.value]
         )
 
+        # 检查权限
         if self.permission:
             queryset = AccessControlList.objects.filter_by_access(
                 self.permission, user, queryset
@@ -243,6 +252,8 @@ class SearchModel(object):
 class SearchField(object):
     """
     Search for terms in fields that directly belong to the parent SearchModel
+
+    搜索字段，在直属的父类SearchModel的字段内搜索词条
     """
     def __init__(self, search_model, field, label):
         self.search_model = search_model

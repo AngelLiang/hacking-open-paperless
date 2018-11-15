@@ -8,6 +8,7 @@ import qsstats
 
 
 def new_documents_per_month():
+    '''每月新文档数量'''
     Document = apps.get_model(app_label='documents', model_name='Document')
 
     qss = qsstats.QuerySetStats(Document.passthrough.all(), 'date_added')
@@ -26,6 +27,7 @@ def new_documents_per_month():
 
 
 def new_document_pages_per_month():
+    '''每月新文档页数'''
     DocumentPage = apps.get_model(
         app_label='documents', model_name='DocumentPage'
     )
@@ -48,6 +50,7 @@ def new_document_pages_per_month():
 
 
 def new_documents_this_month():
+    '''本月新文档'''
     Document = apps.get_model(app_label='documents', model_name='Document')
 
     qss = qsstats.QuerySetStats(Document.objects.all(), 'date_added')
@@ -77,6 +80,7 @@ def new_document_versions_per_month():
 
 
 def new_document_pages_this_month():
+    '''本月新文档页数'''
     DocumentPage = apps.get_model(
         app_label='documents', model_name='DocumentPage'
     )
@@ -88,6 +92,7 @@ def new_document_pages_this_month():
 
 
 def total_document_per_month():
+    '''每月总文档数量'''
     Document = apps.get_model(app_label='documents', model_name='Document')
 
     qss = qsstats.QuerySetStats(Document.objects.all(), 'date_added')
@@ -146,6 +151,7 @@ def total_document_version_per_month():
 
 
 def total_document_page_per_month():
+    '''每月文档总页数'''
     DocumentPage = apps.get_model(
         app_label='documents', model_name='DocumentPage'
     )

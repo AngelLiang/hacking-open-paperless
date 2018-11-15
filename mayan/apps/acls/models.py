@@ -28,6 +28,8 @@ class AccessControlList(models.Model):
     Fields:
     * Role - Custom role that is being granted a permission. Roles are created
     in the Setup menu.
+
+    访问控制列表
     """
     content_type = models.ForeignKey(
         ContentType, on_delete=models.CASCADE,
@@ -42,6 +44,7 @@ class AccessControlList(models.Model):
         StoredPermission, blank=True, related_name='acls',
         verbose_name=_('Permissions')
     )
+    # 角色
     role = models.ForeignKey(
         Role, on_delete=models.CASCADE, related_name='acls',
         verbose_name=_('Role')

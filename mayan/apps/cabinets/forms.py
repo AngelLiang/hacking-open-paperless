@@ -13,6 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 class CabinetListForm(forms.Form):
+    '''柜子列表表单'''
     def __init__(self, *args, **kwargs):
         help_text = kwargs.pop('help_text', None)
         permission = kwargs.pop('permission', None)

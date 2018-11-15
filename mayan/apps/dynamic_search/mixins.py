@@ -7,6 +7,7 @@ from .classes import SearchModel
 
 
 class SearchModelMixin(object):
+    '''搜索模型混入类'''
     def get_search_model(self):
         try:
             return SearchModel.get(self.kwargs['search_model'])
