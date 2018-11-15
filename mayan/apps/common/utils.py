@@ -85,6 +85,7 @@ def fs_cleanup(filename, file_descriptor=None, suppress_exceptions=True):
 
 
 def get_descriptor(file_input, read=True):
+    '''获取文件描述符'''
     try:
         # Is it a file like object?
         file_input.seek(0)

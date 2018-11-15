@@ -21,6 +21,7 @@ from django_downloadview import (
 )
 from pure_pagination.mixins import PaginationMixin
 
+# 组合forms、mixins和settings
 from .forms import ChoiceForm
 from .mixins import (
     DeleteExtraDataMixin, DynamicFormViewMixin, ExtraContextMixin,

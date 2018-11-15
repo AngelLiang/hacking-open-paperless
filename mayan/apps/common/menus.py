@@ -9,15 +9,21 @@ __all__ = (
     'menu_secondary', 'menu_setup', 'menu_sidebar', 'menu_tools', 'menu_user'
 )
 
+# ### 菜单 ###
+
+# 关于
 menu_about = Menu(icon='fa fa-info', label=_('System'), name='about menu')
 menu_facet = Menu(name='object facet')
 menu_object = Menu(name='object menu')
+# 主页
 menu_main = Menu(name='main menu')
 menu_multi_item = Menu(name='multi item menu')
 menu_secondary = Menu(name='secondary menu')
 menu_setup = Menu(name='setup menu')
 menu_sidebar = Menu(name='sidebar menu')
+# 工具
 menu_tools = Menu(name='tools menu')
+# 用户
 menu_user = Menu(
     icon='fa fa-user', name='user menu', label=_('User')
 )

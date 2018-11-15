@@ -17,6 +17,7 @@ class NotACompressedFile(Exception):
 
 
 class CompressedFile(object):
+    '''压缩文件'''
     def __init__(self, file_input=None):
         if file_input:
             try:

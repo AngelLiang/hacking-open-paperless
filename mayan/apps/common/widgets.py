@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class DetailSelectMultiple(forms.widgets.SelectMultiple):
+    '''Django form widget selector'''
     def __init__(self, queryset=None, *args, **kwargs):
         self.queryset = queryset
         super(DetailSelectMultiple, self).__init__(*args, **kwargs)
@@ -83,6 +84,8 @@ class EmailInput(forms.widgets.Input):
     """
     Class for a login form widget that accepts only well formated
     email address
+
+    Django form widget input
     """
     input_type = 'email'
 

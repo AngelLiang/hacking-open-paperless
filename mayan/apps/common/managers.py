@@ -6,6 +6,7 @@ from django.db import models
 
 
 class ErrorLogEntryManager(models.Manager):
+    '''错误日志条目Manager'''
     def register(self, model):
         ErrorLogEntry = apps.get_model(
             app_label='common', model_name='ErrorLogEntry'

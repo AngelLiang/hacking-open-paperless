@@ -7,10 +7,12 @@ from django.utils import timezone, translation
 
 
 def handler_pre_initial_setup(sender, **kwargs):
+    '''初始化配置预处理'''
     management.call_command('migrate', interactive=False)
 
 
 def handler_pre_upgrade(sender, **kwargs):
+    '''upgrade预处理'''
     management.call_command('migrate', fake_initial=True, interactive=False)
     management.call_command('purgeperiodictasks', interactive=False)
 
@@ -47,6 +49,7 @@ def user_locale_profile_session_config(sender, request, user, **kwargs):
 
 
 def user_locale_profile_create(sender, instance, created, **kwargs):
+    '''创建user locale profile'''
     UserLocaleProfile = apps.get_model(
         app_label='common', model_name='UserLocaleProfile'
     )

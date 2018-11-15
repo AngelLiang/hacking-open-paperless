@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from smart_settings import Namespace
 
 namespace = Namespace(name='common', label=_('Common'))
+# 自动记录日志
 setting_auto_logging = namespace.add_setting(
     global_name='COMMON_AUTO_LOGGING',
     default=True,
@@ -22,6 +23,7 @@ settings_db_sync_task_delay = namespace.add_setting(
         'propagate.'
     )
 )
+# 本地设置文件
 setting_local_settings_filename = namespace.add_setting(
     global_name='COMMON_LOCAL_SETTINGS_FILENAME',
     default='local', help_text=_(
@@ -41,6 +43,7 @@ setting_shared_storage = namespace.add_setting(
     default='storage.backends.filebasedstorage.FileBasedStorage',
     help_text=_('A storage backend that all workers can use to share files.')
 )
+# 临时文件夹
 setting_temporary_directory = namespace.add_setting(
     global_name='COMMON_TEMPORARY_DIRECTORY', default=tempfile.gettempdir(),
     help_text=_(
@@ -49,6 +52,7 @@ setting_temporary_directory = namespace.add_setting(
     ),
     is_path=True
 )
+# 生产环境下错误日志路径
 setting_production_error_log_path = namespace.add_setting(
     global_name='COMMON_PRODUCTION_ERROR_LOG_PATH',
     default=os.path.join(settings.BASE_DIR, 'error.log'), help_text=_(

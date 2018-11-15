@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 @app.task(ignore_result=True)
 def task_delete_stale_uploads():
+    '''删除旧的上传文件任务'''
     logger.info('Executing')
 
     SharedUploadedFile = apps.get_model(
