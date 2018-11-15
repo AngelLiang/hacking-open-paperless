@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 class LogEntry(models.Model):
+    '''日志条目'''
     datetime = models.DateTimeField(
         auto_now_add=True, editable=False, verbose_name=_('Date time')
     )
@@ -29,21 +30,27 @@ class LogEntry(models.Model):
 
 
 class UserMailer(models.Model):
+    '''用户邮寄者'''
+    # 名称
     label = models.CharField(
         max_length=128, unique=True, verbose_name=_('Label')
     )
+    # 默认
     default = models.BooleanField(
         default=True, help_text=_(
             'If default, this mailing profile will be pre-selected on the '
             'document mailing form.'
         ), verbose_name=_('Default')
     )
+    # 使能
     enabled = models.BooleanField(default=True, verbose_name=_('Enabled'))
+    # 后端路径
     backend_path = models.CharField(
         max_length=128,
         help_text=_('The dotted Python path to the backend class.'),
         verbose_name=_('Backend path')
     )
+    # 后端数据
     backend_data = models.TextField(
         blank=True, verbose_name=_('Backend data')
     )
@@ -110,13 +117,17 @@ class UserMailer(models.Model):
 
 
 class UserMailerLogEntry(models.Model):
+    '''用户邮寄者日志条目'''
+    # 用户邮寄者
     user_mailer = models.ForeignKey(
         UserMailer, on_delete=models.CASCADE, related_name='error_log',
         verbose_name=_('User mailer')
     )
+    # 时间
     datetime = models.DateTimeField(
         auto_now_add=True, editable=False, verbose_name=_('Date time')
     )
+    # 消息
     message = models.TextField(
         blank=True, editable=False, verbose_name=_('Message')
     )

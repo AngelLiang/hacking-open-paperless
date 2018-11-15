@@ -41,6 +41,7 @@ class SystemMailerLogEntryListView(SingleObjectListView):
 
 
 class MailDocumentView(MultipleObjectFormActionView):
+    '''邮寄文档View'''
     as_attachment = True
     form_class = DocumentMailForm
     model = Document
