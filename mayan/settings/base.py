@@ -152,8 +152,14 @@ WSGI_APPLICATION = 'mayan.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
+# 上传文件存放的位置
+# MEDIA_ROOT: Absolute filesystem path to the directory that will hold user-uploaded files.
+# docs: https://docs.djangoproject.com/en/1.10/ref/settings/#media-root
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+# 数据库
+# 使用sqlite3
+# docs: https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -236,6 +242,7 @@ SITE_ID = 1
 
 sys.path.append(os.path.join(BASE_DIR, 'apps'))
 
+# 静态资源路径
 STATIC_ROOT = os.path.join(MEDIA_ROOT, 'static')
 
 STATICFILES_FINDERS = (
@@ -254,8 +261,8 @@ COMPRESS_CSS_FILTERS = (
 COMPRESS_ENABLED = False
 COMPRESS_PARSER = 'compressor.parser.HtmlParser'
 # --------- Django -------------------
-LOGIN_URL = 'authentication:login_view'
-LOGIN_REDIRECT_URL = 'common:home'
+LOGIN_URL = 'authentication:login_view'  # 登录view
+LOGIN_REDIRECT_URL = 'common:home'       # 登录后重定向的URL
 INTERNAL_IPS = ('127.0.0.1',)
 # ---------- Django REST framework -----------
 REST_FRAMEWORK = {
@@ -304,5 +311,6 @@ TIMEZONE_SESSION_KEY = 'django_timezone'
 # ----- Stronghold -------
 STRONGHOLD_PUBLIC_URLS = (r'^/docs/.+$',)
 
+# 使用Redis作为Celery的broker和 result backend
 BROKER_URL = 'redis://127.0.0.1:6379/0'
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
