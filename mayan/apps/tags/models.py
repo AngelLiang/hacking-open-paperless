@@ -16,10 +16,14 @@ from .events import event_tag_attach, event_tag_remove
 
 @python_2_unicode_compatible
 class Tag(models.Model):
+    '''标签'''
+    # 名称
     label = models.CharField(
         db_index=True, max_length=128, unique=True, verbose_name=_('Label')
     )
+    # 颜色
     color = RGBColorField(verbose_name=_('Color'))
+    # 文档
     documents = models.ManyToManyField(
         Document, related_name='tags', verbose_name=_('Documents')
     )
@@ -42,6 +46,7 @@ class Tag(models.Model):
         )
 
     def get_document_count(self, user):
+        '''获取文档数量'''
         queryset = AccessControlList.objects.filter_by_access(
             permission_document_view, user, queryset=self.documents
         )
@@ -56,6 +61,7 @@ class Tag(models.Model):
 
 
 class DocumentTag(Tag):
+    '''文档标签'''
     class Meta:
         proxy = True
         verbose_name = _('Document tag')

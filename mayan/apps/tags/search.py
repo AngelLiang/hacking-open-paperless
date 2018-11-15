@@ -6,6 +6,7 @@ from dynamic_search.classes import SearchModel
 
 from .permissions import permission_tag_view
 
+# 标签搜索
 tag_search = SearchModel(
     app_label='tags', model_name='Tag',
     permission=permission_tag_view,

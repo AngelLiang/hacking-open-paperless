@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 class TagMultipleSelectionForm(forms.Form):
+    '''标签多选选择器表单'''
     def __init__(self, *args, **kwargs):
         help_text = kwargs.pop('help_text', None)
         permission = kwargs.pop('permission', permission_tag_view)

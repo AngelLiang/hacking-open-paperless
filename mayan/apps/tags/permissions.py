@@ -6,6 +6,7 @@ from permissions import PermissionNamespace
 
 namespace = PermissionNamespace('tags', _('Tags'))
 
+# 标签的 创建、删除、查看、编辑、绑定和移除 权限
 permission_tag_create = namespace.add_permission(
     name='tag_create', label=_('Create new tags')
 )

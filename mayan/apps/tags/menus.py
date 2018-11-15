@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from navigation import Menu
 
+# 标签菜单
 menu_tags = Menu(
     icon='fa fa-tag', label=_('Tags'), name='tags menu'
 )
