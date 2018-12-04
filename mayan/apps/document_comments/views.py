@@ -18,6 +18,7 @@ from .permissions import (
 
 
 class DocumentCommentCreateView(SingleObjectCreateView):
+    """文档评论创建View"""
     fields = ('comment',)
     model = Comment
     object_verbose_name = _('Comment')
@@ -58,6 +59,7 @@ class DocumentCommentCreateView(SingleObjectCreateView):
 
 
 class DocumentCommentDeleteView(SingleObjectDeleteView):
+    """文档评论删除View"""
     model = Comment
 
     def dispatch(self, request, *args, **kwargs):
@@ -87,6 +89,7 @@ class DocumentCommentDeleteView(SingleObjectDeleteView):
 
 
 class DocumentCommentListView(SingleObjectListView):
+    """文档评论列表View"""
     def get_document(self):
         return get_object_or_404(Document, pk=self.kwargs['pk'])
 
