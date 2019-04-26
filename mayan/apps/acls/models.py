@@ -30,6 +30,10 @@ class AccessControlList(models.Model):
     in the Setup menu.
 
     访问控制列表
+
+    在acl的情况下，它们使用3个元素：actor、permission、object。
+    在这种情况下，actor就是角色，权限是Nayan的权限，对象可以是任何东西：文件、文件夹、索引等。
+
     """
     content_type = models.ForeignKey(
         ContentType, on_delete=models.CASCADE,

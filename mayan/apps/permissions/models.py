@@ -71,12 +71,15 @@ class StoredPermission(models.Model):
 
 @python_2_unicode_compatible
 class Role(models.Model):
+    """角色"""
     label = models.CharField(
         max_length=64, unique=True, verbose_name=_('Label')
     )
+    # 权限
     permissions = models.ManyToManyField(
         StoredPermission, related_name='roles', verbose_name=_('Permissions')
     )
+    # 组
     groups = models.ManyToManyField(
         Group, related_name='roles', verbose_name=_('Groups')
     )
