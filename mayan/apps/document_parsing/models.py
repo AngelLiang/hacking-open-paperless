@@ -11,7 +11,7 @@ from .managers import DocumentPageContentManager
 
 @python_2_unicode_compatible
 class DocumentPageContent(models.Model):
-    '''文档页码内容'''
+    """文档页码内容"""
     # 文档页码
     document_page = models.OneToOneField(
         DocumentPage, on_delete=models.CASCADE, related_name='content',
@@ -32,7 +32,7 @@ class DocumentPageContent(models.Model):
 
 @python_2_unicode_compatible
 class DocumentVersionParseError(models.Model):
-    '''文档版本解析错误'''
+    """文档版本解析错误"""
     # 文档版本
     document_version = models.ForeignKey(
         DocumentVersion, on_delete=models.CASCADE,

@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 class DocumentManager(models.Manager):
-    '''文档Manager'''
+    """文档Manager"""
     def delete_stubs(self):
         for stale_stub_document in self.filter(is_stub=True, date_added__lt=now() - timedelta(seconds=STUB_EXPIRATION_INTERVAL)):
             stale_stub_document.delete(trash=False)
@@ -29,13 +29,13 @@ class DocumentManager(models.Manager):
         ).filter(in_trash=False)
 
     def invalidate_cache(self):
-        '''清除缓存'''
+        """清除缓存"""
         for document in self.model.objects.all():
             document.invalidate_cache()
 
 
 class DocumentTypeManager(models.Manager):
-    '''文档类型Manager'''
+    """文档类型Manager"""
     def check_delete_periods(self):
         logger.info('Executing')
 
@@ -103,7 +103,7 @@ class DocumentTypeManager(models.Manager):
 
 
 class DuplicatedDocumentManager(models.Manager):
-    '''文档副本Manager'''
+    """文档副本Manager"""
     def scan(self):
         """
         Find duplicates by iterating over all documents and then
@@ -147,7 +147,7 @@ class PassthroughManager(models.Manager):
 
 
 class RecentDocumentManager(models.Manager):
-    '''最近文档Manager'''
+    """最近文档Manager"""
     def add_document_for_user(self, user, document):
         if user.is_authenticated:
             new_recent, created = self.model.objects.get_or_create(

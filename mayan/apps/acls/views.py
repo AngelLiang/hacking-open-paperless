@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 
 class ACLCreateView(SingleObjectCreateView):
-    '''ACL创建View'''
+    """ACL创建View"""
     fields = ('role',)
     model = AccessControlList
 
@@ -113,7 +113,7 @@ class ACLDeleteView(SingleObjectDeleteView):
 
 
 class ACLListView(SingleObjectListView):
-    '''ACL列表View'''
+    """ACL列表View"""
     def dispatch(self, request, *args, **kwargs):
         self.object_content_type = get_object_or_404(
             ContentType, app_label=self.kwargs['app_label'],

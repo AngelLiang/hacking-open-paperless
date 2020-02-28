@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class DetailSelectMultiple(forms.widgets.SelectMultiple):
-    '''Django form widget selector'''
+    """Django form widget selector"""
     def __init__(self, queryset=None, *args, **kwargs):
         self.queryset = queryset
         super(DetailSelectMultiple, self).__init__(*args, **kwargs)

@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 class SearchModel(object):
-    '''搜索模型'''
+    """搜索模型"""
     registry = {}
 
     @classmethod
@@ -92,7 +92,7 @@ class SearchModel(object):
         return queries
 
     def get_all_search_fields(self):
-        '''获取所有搜索字段'''
+        """获取所有搜索字段"""
         return self.search_fields
 
     def get_full_name(self):
@@ -129,7 +129,7 @@ class SearchModel(object):
         ]
 
     def search(self, query_string, user, global_and_search=False):
-        '''搜索方法'''
+        """搜索方法"""
         AccessControlList = apps.get_model(
             app_label='acls', model_name='AccessControlList'
         )

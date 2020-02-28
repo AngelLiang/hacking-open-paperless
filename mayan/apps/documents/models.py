@@ -344,7 +344,7 @@ class Document(models.Model):
 
 
 class DeletedDocument(Document):
-    '''已删除的文档'''
+    """已删除的文档"""
     objects = TrashCanManager()
 
     class Meta:
@@ -770,7 +770,7 @@ class DocumentPage(models.Model):
             )
 
     def generate_image(self, *args, **kwargs):
-        '''生成图片'''
+        """生成图片"""
         # Convert arguments into transformations
         transformations = kwargs.get('transformations', [])
 
@@ -837,7 +837,7 @@ class DocumentPage(models.Model):
         return cache_filename
 
     def get_image(self, transformations=None):
-        '''获取图片'''
+        """获取图片"""
         cache_filename = self.cache_filename
         logger.debug('Page cache filename: %s', cache_filename)
 
@@ -876,7 +876,7 @@ class DocumentPage(models.Model):
         return converter.get_page()
 
     def invalidate_cache(self):
-        '''缓存无效化'''
+        """缓存无效化"""
         cache_storage_backend.delete(self.cache_filename)
         for cached_image in self.cached_images.all():
             cached_image.delete()
@@ -897,7 +897,7 @@ class DocumentPage(models.Model):
 
 
 class DocumentPageCachedImage(models.Model):
-    '''文档页码缓存图片'''
+    """文档页码缓存图片"""
     # 文档页数
     document_page = models.ForeignKey(
         DocumentPage, on_delete=models.CASCADE, related_name='cached_images',
@@ -963,7 +963,7 @@ class RecentDocument(models.Model):
 
 @python_2_unicode_compatible
 class DuplicatedDocument(models.Model):
-    '''文档副本'''
+    """文档副本"""
     document = models.ForeignKey(
         Document, on_delete=models.CASCADE, related_name='duplicates',
         verbose_name=_('Document')

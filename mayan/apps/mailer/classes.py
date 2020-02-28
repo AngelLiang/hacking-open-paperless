@@ -50,7 +50,7 @@ class MailerBackendBase(object):
 
 
 class MailerBackend(six.with_metaclass(MailerBackendMetaclass, MailerBackendBase)):
-    '''邮寄者后台'''
+    """邮寄者后台"""
     @classmethod
     def get(cls, name):
         return cls._registry[name]

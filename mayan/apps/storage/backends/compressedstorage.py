@@ -22,7 +22,7 @@ from ..settings import FILESTORAGE_LOCATION
 
 class CompressedStorage(FileSystemStorage):
     """Simple wrapper for the stock Django FileSystemStorage class"""
-    '''压缩存储'''
+    """压缩存储"""
 
     separator = os.path.sep
 
@@ -31,9 +31,9 @@ class CompressedStorage(FileSystemStorage):
         self.location = FILESTORAGE_LOCATION
 
     def save(self, name, content):
-        '''
+        """
         使用了StringIO和zipfile
-        '''
+        """
         descriptor = StringIO()
         zf = zipfile.ZipFile(descriptor, mode='w', compression=COMPRESSION)
 

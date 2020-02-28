@@ -19,7 +19,7 @@ from .settings import (
 
 
 class DocumentMailForm(forms.Form):
-    '''文档邮件表单'''
+    """文档邮件表单"""
     def __init__(self, *args, **kwargs):
         as_attachment = kwargs.pop('as_attachment', False)
         user = kwargs.pop('user', None)
@@ -73,7 +73,7 @@ class DocumentMailForm(forms.Form):
 
 
 class UserMailerBackendSelectionForm(forms.Form):
-    '''用户邮寄者后台选择器表单'''
+    """用户邮寄者后台选择器表单"""
     backend = forms.ChoiceField(choices=(), label=_('Backend'))
 
     def __init__(self, *args, **kwargs):

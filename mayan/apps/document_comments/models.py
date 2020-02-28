@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 @python_2_unicode_compatible
 class Comment(models.Model):
-    '''评论'''
+    """评论"""
 
     # 文档
     document = models.ForeignKey(

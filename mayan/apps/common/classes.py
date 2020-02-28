@@ -46,7 +46,7 @@ class Collection(object):
 
 
 class Dashboard(object):
-    '''主页'''
+    """主页"""
     _registry = {}
 
     @classmethod
@@ -84,7 +84,7 @@ class Dashboard(object):
 
 
 class DashboardWidget(object):
-    '''主页的Widget'''
+    """主页的Widget"""
     _registry = []
 
     @classmethod
@@ -104,7 +104,7 @@ class DashboardWidget(object):
 
 @python_2_unicode_compatible
 class ErrorLogNamespace(object):
-    '''错误日志namespace'''
+    """错误日志namespace"""
     def __init__(self, name, label=None):
         self.name = name
         self.label = label or name

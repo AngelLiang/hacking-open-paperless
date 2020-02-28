@@ -7,6 +7,6 @@ from .models import Tag
 
 @admin.register(Tag)
 class TagAdmin(admin.ModelAdmin):
-    '''标签管理'''
+    """标签管理"""
     filter_horizontal = ('documents',)
     list_display = ('label', 'color')

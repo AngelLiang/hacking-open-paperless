@@ -212,7 +212,7 @@ class DocumentTypeFilenameForm_create(forms.ModelForm):
 
 
 class DocumentDownloadForm(forms.Form):
-    '''文档下载表单'''
+    """文档下载表单"""
     # 是否压缩
     compressed = forms.BooleanField(
         label=_('Compress'), required=False,
@@ -253,7 +253,7 @@ class DocumentVersionDownloadForm(DocumentDownloadForm):
 
 
 class DocumentPrintForm(forms.Form):
-    '''文档打印表单'''
+    """文档打印表单"""
     # 页码选择
     page_group = forms.ChoiceField(
         choices=PAGE_RANGE_CHOICES, initial=PAGE_RANGE_ALL,

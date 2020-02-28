@@ -60,7 +60,7 @@ class CheckVersionView(SimpleView):
 
 
 class CurrentUserDetailsView(SingleObjectDetailView):
-    '''当前用户详情View'''
+    """当前用户详情View"""
     form_class = UserForm_view
 
     def get_object(self):
@@ -74,7 +74,7 @@ class CurrentUserDetailsView(SingleObjectDetailView):
 
 
 class CurrentUserEditView(SingleObjectEditView):
-    '''当前用户编辑View'''
+    """当前用户编辑View"""
     extra_context = {'object': None, 'title': _('Edit current user details')}
     form_class = UserForm
     post_action_redirect = reverse_lazy('common:current_user_details')
@@ -188,7 +188,7 @@ class FilterResultListView(SingleObjectListView):
 
 
 class HomeView(TemplateView):
-    '''主页'''
+    """主页"""
     template_name = 'appearance/home.html'
 
 
@@ -276,7 +276,7 @@ class PackagesLicensesView(SimpleView):
 
 
 class SetupListView(TemplateView):
-    '''设置列表View'''
+    """设置列表View"""
     template_name = 'appearance/generic_list_horizontal.html'
 
     def get_context_data(self, **kwargs):
@@ -291,7 +291,7 @@ class SetupListView(TemplateView):
 
 
 class ToolsListView(SimpleView):
-    '''待做事项View'''
+    """待做事项View"""
     template_name = 'appearance/generic_list_horizontal.html'
 
     def get_menu_links(self):

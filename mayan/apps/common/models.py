@@ -20,7 +20,7 @@ def upload_to(instance, filename):
 
 
 class ErrorLogEntry(models.Model):
-    '''错误日志条目'''
+    """错误日志条目"""
     namespace = models.CharField(
         max_length=128, verbose_name=_('Namespace')
     )
@@ -49,7 +49,7 @@ class ErrorLogEntry(models.Model):
 
 @python_2_unicode_compatible
 class SharedUploadedFile(models.Model):
-    '''共享的上传文件'''
+    """共享的上传文件"""
     # 文件
     file = models.FileField(
         storage=shared_storage_backend, upload_to=upload_to,

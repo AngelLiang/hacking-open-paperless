@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 
 
 class TagAttachActionView(MultipleObjectFormActionView):
-    '''标签绑定操作View'''
+    """标签绑定操作View"""
     form_class = TagMultipleSelectionForm
     model = Document
     object_permission = permission_tag_attach
@@ -109,7 +109,7 @@ class TagAttachActionView(MultipleObjectFormActionView):
 
 
 class TagCreateView(SingleObjectCreateView):
-    '''创建标签View'''
+    """创建标签View"""
     extra_context = {'title': _('Create tag')}
     fields = ('label', 'color')
     model = Tag
@@ -118,7 +118,7 @@ class TagCreateView(SingleObjectCreateView):
 
 
 class TagDeleteActionView(MultipleObjectConfirmActionView):
-    '''标签删除操作View'''
+    """标签删除操作View"""
     model = Tag
     post_action_redirect = reverse_lazy('tags:tag_list')
     object_permission = permission_tag_delete
@@ -166,7 +166,7 @@ class TagDeleteActionView(MultipleObjectConfirmActionView):
 
 
 class TagEditView(SingleObjectEditView):
-    '''标签编辑View'''
+    """标签编辑View"""
     fields = ('label', 'color')
     model = Tag
     object_permission = permission_tag_edit
@@ -180,7 +180,7 @@ class TagEditView(SingleObjectEditView):
 
 
 class TagListView(SingleObjectListView):
-    '''标签列表View'''
+    """标签列表View"""
     object_permission = permission_tag_view
 
     def get_extra_context(self):
@@ -215,7 +215,7 @@ class TagTaggedItemListView(DocumentListView):
 
 
 class DocumentTagListView(TagListView):
-    '''文档的标签列表View'''
+    """文档的标签列表View"""
     def dispatch(self, request, *args, **kwargs):
         self.document = get_object_or_404(Document, pk=self.kwargs['pk'])
 
@@ -240,7 +240,7 @@ class DocumentTagListView(TagListView):
 
 
 class TagRemoveActionView(MultipleObjectFormActionView):
-    '''标签移除操作View'''
+    """标签移除操作View"""
     form_class = TagMultipleSelectionForm
     model = Document
     object_permission = permission_tag_remove

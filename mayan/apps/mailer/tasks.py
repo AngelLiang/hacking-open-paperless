@@ -7,7 +7,7 @@ from mayan.celery import app
 
 @app.task(ignore_result=True)
 def task_send_document(subject_text, body_text_content, sender, recipient, user_mailer_id, as_attachment=False, document_id=None):
-    '''发送文件任务'''
+    """发送文件任务"""
     Document = apps.get_model(
         app_label='documents', model_name='Document'
     )

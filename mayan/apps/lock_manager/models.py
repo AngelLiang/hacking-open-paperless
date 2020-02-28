@@ -10,7 +10,7 @@ from .settings import setting_default_lock_timeout
 
 @python_2_unicode_compatible
 class Lock(models.Model):
-    '''锁'''
+    """锁"""
     # 创建时间
     creation_datetime = models.DateTimeField(
         auto_now_add=True, verbose_name=_('Creation datetime')

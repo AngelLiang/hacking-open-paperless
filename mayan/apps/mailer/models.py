@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 class LogEntry(models.Model):
-    '''日志条目'''
+    """日志条目"""
     datetime = models.DateTimeField(
         auto_now_add=True, editable=False, verbose_name=_('Date time')
     )
@@ -30,7 +30,7 @@ class LogEntry(models.Model):
 
 
 class UserMailer(models.Model):
-    '''用户邮寄者'''
+    """用户邮寄者"""
     # 名称
     label = models.CharField(
         max_length=128, unique=True, verbose_name=_('Label')
@@ -117,7 +117,7 @@ class UserMailer(models.Model):
 
 
 class UserMailerLogEntry(models.Model):
-    '''用户邮寄者日志条目'''
+    """用户邮寄者日志条目"""
     # 用户邮寄者
     user_mailer = models.ForeignKey(
         UserMailer, on_delete=models.CASCADE, related_name='error_log',

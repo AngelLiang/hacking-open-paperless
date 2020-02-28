@@ -210,7 +210,7 @@ class WorkflowState(models.Model):
 
 @python_2_unicode_compatible
 class WorkflowStateAction(models.Model):
-    '''工作流状态操作'''
+    """工作流状态操作"""
 
     # 工作流状态
     state = models.ForeignKey(
@@ -279,7 +279,7 @@ class WorkflowStateAction(models.Model):
 
 @python_2_unicode_compatible
 class WorkflowTransition(models.Model):
-    '''工作流转变'''
+    """工作流转变"""
     workflow = models.ForeignKey(
         Workflow, on_delete=models.CASCADE, related_name='transitions',
         verbose_name=_('Workflow')
@@ -312,7 +312,7 @@ class WorkflowTransition(models.Model):
 
 @python_2_unicode_compatible
 class WorkflowTransitionTriggerEvent(models.Model):
-    '''工作流转变触发事件'''
+    """工作流转变触发事件"""
     # 工作流转变
     transition = models.ForeignKey(
         WorkflowTransition, on_delete=models.CASCADE,
@@ -333,7 +333,7 @@ class WorkflowTransitionTriggerEvent(models.Model):
 
 @python_2_unicode_compatible
 class WorkflowInstance(models.Model):
-    '''工作流实例'''
+    """工作流实例"""
     # 工作流
     workflow = models.ForeignKey(
         Workflow, on_delete=models.CASCADE, related_name='instances',

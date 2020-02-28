@@ -7,7 +7,7 @@ from .models import AccessControlList
 
 @admin.register(AccessControlList)
 class AccessControlListAdmin(admin.ModelAdmin):
-    '''ACL管理'''
+    """ACL管理"""
     filter_horizontal = ('permissions',)
     list_display = ('pk', 'role', 'content_type', 'content_object')
     list_display_links = ('pk',)

@@ -122,7 +122,7 @@ class Index(models.Model):
 
 
 class IndexInstance(Index):
-    '''索引实例'''
+    """索引实例"""
     def get_instance_node_count(self):
         try:
             return self.instance_root.get_descendant_count()
@@ -278,7 +278,7 @@ class IndexTemplateNode(MPTTModel):
 
 @python_2_unicode_compatible
 class IndexInstanceNode(MPTTModel):
-    '''索引实例节点'''
+    """索引实例节点"""
     parent = TreeForeignKey(
         'self', blank=True, null=True, on_delete=models.CASCADE
     )
@@ -399,7 +399,7 @@ class IndexInstanceNode(MPTTModel):
 
 
 class DocumentIndexInstanceNode(IndexInstanceNode):
-    '''文档索引实例节点'''
+    """文档索引实例节点"""
     objects = DocumentIndexInstanceNodeManager()
 
     class Meta:
